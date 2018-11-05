@@ -1,0 +1,56 @@
+
+I took the Stencil App Starter (see readme.md) to build this project.
+
+The idea is that there would be a parent application, with a slot into which could
+be loaded any module that implemented the interface IModuleRPC, allowing the parent to
+make function calls on the module. The parent would pass a corresponding interface to
+each loaded module instance, so that two-way calling can be established. Additionally,
+the parent can pass configuration information, including asset references and stylesheet
+names, so that the module can load these in its render() method.
+
+KefaloniaConnector is a singleton placeholder which takes care of the provisioning of 
+loaded modules. Once the module is loaded, the module passes its identity and RPC interface
+to the parent, which in turn passes a configuration object back to the module. The KefaloniaConnector
+would itself read in a configuration manifest in order to create a dictionary of configuration
+objects, one for each component instance.
+
+Routing is handled by the app-loader module. This works by loading the correct module, and passing
+its instance ID in the route. The instance ID is read, and this triggers the provisioning process 
+above.
+
+At the moment there is only one module - app-x. The KefaloniaConnector simply passes as different
+configuration file back depending on the URL, and this updates the app-x instance UI appropriately,
+as below:
+
+
+http://localhost:3565/x/x - Config File value for 'whatever' for this module instance is Whatever.
+http://localhost:3565/x/<anythingelse> - Config File value for 'whatever' for this module instance is Not x.
+
+(note that the port number will change depending on your installation).
+
+So far, so good. It looks like we will be able to compile separate modules and bundle everything up.
+
+The question now is how we create a dynamic 'list' of module routes. In the case of the icenter application,
+we might have something like:
+
+InstanceID  ModuleType
+1           Team Exercise
+2           Poll 
+3           Team Exercise 
+4           Individual Whiteboard 
+
+
+This give us a playlist, so we would need a list of 4 routes, each with a module name, which passes
+the instance ID to the module. As we navigated through the playlist, we would activate the appropriate
+route entry (hote that if we navigate from 1 to 3, for instance, we just reload the module with a new
+instance ID which caused it to render a new interface). We need, however, to do this at runtime, 
+and not at compiletime. Therefore we need some way of extending the stencil-route-switch component
+ (https://github.com/ionic-team/stencil-router/blob/master/packages/router/src/components/switch/switch.tsx_)
+ 
+ so that it can create its routing table dynamically.
+
+ Run using npm start or npm start --es5, whichever works.
+
+
+
+
