@@ -19,6 +19,9 @@ export namespace Components {
   interface AppHome {}
   interface AppHomeAttributes extends StencilHTMLAttributes {}
 
+  interface AppLoader {}
+  interface AppLoaderAttributes extends StencilHTMLAttributes {}
+
   interface AppProfile {
     'match': MatchResults;
   }
@@ -26,21 +29,40 @@ export namespace Components {
     'match'?: MatchResults;
   }
 
-  interface AppRoot {}
-  interface AppRootAttributes extends StencilHTMLAttributes {}
+  interface AppX {
+    'instanceID': string;
+    'match': MatchResults;
+  }
+  interface AppXAttributes extends StencilHTMLAttributes {
+    'instanceID'?: string;
+    'match'?: MatchResults;
+  }
+
+  interface AppY {
+    'instanceID': string;
+    'match': MatchResults;
+  }
+  interface AppYAttributes extends StencilHTMLAttributes {
+    'instanceID'?: string;
+    'match'?: MatchResults;
+  }
 }
 
 declare global {
   interface StencilElementInterfaces {
     'AppHome': Components.AppHome;
+    'AppLoader': Components.AppLoader;
     'AppProfile': Components.AppProfile;
-    'AppRoot': Components.AppRoot;
+    'AppX': Components.AppX;
+    'AppY': Components.AppY;
   }
 
   interface StencilIntrinsicElements {
     'app-home': Components.AppHomeAttributes;
+    'app-loader': Components.AppLoaderAttributes;
     'app-profile': Components.AppProfileAttributes;
-    'app-root': Components.AppRootAttributes;
+    'app-x': Components.AppXAttributes;
+    'app-y': Components.AppYAttributes;
   }
 
 
@@ -50,28 +72,44 @@ declare global {
     new (): HTMLAppHomeElement;
   };
 
+  interface HTMLAppLoaderElement extends Components.AppLoader, HTMLStencilElement {}
+  var HTMLAppLoaderElement: {
+    prototype: HTMLAppLoaderElement;
+    new (): HTMLAppLoaderElement;
+  };
+
   interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
   var HTMLAppProfileElement: {
     prototype: HTMLAppProfileElement;
     new (): HTMLAppProfileElement;
   };
 
-  interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
-  var HTMLAppRootElement: {
-    prototype: HTMLAppRootElement;
-    new (): HTMLAppRootElement;
+  interface HTMLAppXElement extends Components.AppX, HTMLStencilElement {}
+  var HTMLAppXElement: {
+    prototype: HTMLAppXElement;
+    new (): HTMLAppXElement;
+  };
+
+  interface HTMLAppYElement extends Components.AppY, HTMLStencilElement {}
+  var HTMLAppYElement: {
+    prototype: HTMLAppYElement;
+    new (): HTMLAppYElement;
   };
 
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement
+    'app-loader': HTMLAppLoaderElement
     'app-profile': HTMLAppProfileElement
-    'app-root': HTMLAppRootElement
+    'app-x': HTMLAppXElement
+    'app-y': HTMLAppYElement
   }
 
   interface ElementTagNameMap {
     'app-home': HTMLAppHomeElement;
+    'app-loader': HTMLAppLoaderElement;
     'app-profile': HTMLAppProfileElement;
-    'app-root': HTMLAppRootElement;
+    'app-x': HTMLAppXElement;
+    'app-y': HTMLAppYElement;
   }
 
 
